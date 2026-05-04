@@ -16,10 +16,10 @@ import (
 // Sentinel errors returned by service functions. Adapters check these to format
 // user-facing messages without parsing strings.
 var (
-	ErrSelectionRequired = errors.New("pos1 and pos2 must be set first")
-	ErrClipboardEmpty    = errors.New("clipboard is empty")
-	ErrNothingToUndo     = errors.New("nothing to undo")
-	ErrNothingToRedo     = errors.New("nothing to redo")
+	ErrSelectionRequired = errors.New("primero debes definir pos1 y pos2")
+	ErrClipboardEmpty    = errors.New("el portapapeles está vacío")
+	ErrNothingToUndo     = errors.New("no hay nada para deshacer")
+	ErrNothingToRedo     = errors.New("no hay nada para rehacer")
 )
 
 // Session is the subset of per-player state that service functions need.

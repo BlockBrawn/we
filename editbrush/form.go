@@ -35,7 +35,7 @@ func SendBrushForm(p *player.Player) {
 		PassThrough:     form.NewToggle("Line passes through blocks", false),
 		RandomSchematic: form.NewToggle("Random schematic", false),
 		RandomRotation:  form.NewToggle("Random schematic rotation", false),
-	}, "WorldEdit Brush"))
+	}, "Brocha"))
 }
 
 type brushConfigForm struct {
@@ -109,7 +109,7 @@ func (f brushConfigForm) Submit(submitter form.Submitter, _ *world.Tx) {
 		return
 	}
 	p.SetHeldItems(bound, off)
-	p.Message("Brush bound to held item.")
+	p.Message("§aBrocha vinculada al objeto en mano.§r")
 }
 
 func splitNames(s string) []string {

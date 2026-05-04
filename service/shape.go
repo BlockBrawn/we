@@ -18,7 +18,7 @@ func Line(tx *world.Tx, s Session, args []string) (ChangeResult, error) {
 
 func LineWithOptions(tx *world.Tx, s Session, args []string, opts EditOptions) (ChangeResult, error) {
 	if len(args) < 2 {
-		return ChangeResult{}, fmt.Errorf("usage: //line <blocks> <thickness>")
+		return ChangeResult{}, fmt.Errorf("uso: //line <blocks> <thickness>")
 	}
 	blocks, err := parse.ParseBlockList(args[0])
 	if err != nil {
@@ -75,7 +75,7 @@ func ShapeWithOptions(tx *world.Tx, s Session, anchor cube.Pos, kind edit.ShapeK
 // expect <blocks> <length> <width> <height>.
 func ParseShapeArgs(kind edit.ShapeKind, args []string, hollow bool) (edit.ShapeSpec, []world.Block, error) {
 	if len(args) < 3 {
-		return edit.ShapeSpec{}, nil, fmt.Errorf("not enough shape arguments")
+		return edit.ShapeSpec{}, nil, fmt.Errorf("faltan argumentos para la figura")
 	}
 	blocks, err := parse.ParseBlockList(args[0])
 	if err != nil {
@@ -87,25 +87,25 @@ func ParseShapeArgs(kind edit.ShapeKind, args []string, hollow bool) (edit.Shape
 		r, err1 := strconv.Atoi(args[1])
 		h, err2 := strconv.Atoi(args[2])
 		if err1 != nil || err2 != nil {
-			return edit.ShapeSpec{}, nil, fmt.Errorf("radius and height must be numbers")
+			return edit.ShapeSpec{}, nil, fmt.Errorf("el radio y la altura deben ser números")
 		}
 		spec.Radius, spec.Height = r, h
 	case edit.ShapeCylinder, edit.ShapeCone:
 		r, err1 := strconv.Atoi(args[1])
 		h, err2 := strconv.Atoi(args[2])
 		if err1 != nil || err2 != nil {
-			return edit.ShapeSpec{}, nil, fmt.Errorf("radius and height must be numbers")
+			return edit.ShapeSpec{}, nil, fmt.Errorf("el radio y la altura deben ser números")
 		}
 		spec.Radius, spec.Height = r, h
 	case edit.ShapePyramid, edit.ShapeCube:
 		if len(args) < 4 {
-			return edit.ShapeSpec{}, nil, fmt.Errorf("length, width, and height are required")
+			return edit.ShapeSpec{}, nil, fmt.Errorf("se requiere largo, ancho y alto")
 		}
 		l, err1 := strconv.Atoi(args[1])
 		w, err2 := strconv.Atoi(args[2])
 		h, err3 := strconv.Atoi(args[3])
 		if err1 != nil || err2 != nil || err3 != nil {
-			return edit.ShapeSpec{}, nil, fmt.Errorf("length, width, and height must be numbers")
+			return edit.ShapeSpec{}, nil, fmt.Errorf("largo, ancho y alto deben ser números")
 		}
 		spec.Length, spec.Width, spec.Height = l, w, h
 	}

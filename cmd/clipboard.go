@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	dcf "github.com/df-mc/dragonfly/server/cmd"
+	"github.com/sandertv/gophertunnel/minecraft/text"
 
 	"github.com/df-mc/dragonfly/server/block/cube"
 	"github.com/df-mc/dragonfly/server/player"
@@ -25,7 +26,7 @@ func (c CopyCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 		o.Error(err)
 		return
 	}
-	o.Printf("Copied %d blocks.", result.Copied)
+	o.Print(text.Colourf("<green>Copiados %d bloques.</green>", result.Copied))
 }
 
 // PasteCommand implements //paste [-a] — pastes the clipboard at the player's position.
@@ -41,7 +42,7 @@ func (c PasteCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 		o.Error(err)
 		return
 	}
-	o.Printf("Pasted %d blocks.", result.Changed)
+	o.Print(text.Colourf("<green>Pegados %d bloques.</green>", result.Changed))
 }
 
 // ClearClipboardCommand implements //clearclipboard — clears the player's clipboard.
@@ -50,7 +51,7 @@ type ClearClipboardCommand struct{ playerCommand }
 func (ClearClipboardCommand) Run(src dcf.Source, o *dcf.Output, _ *world.Tx) {
 	p := src.(*player.Player)
 	service.ClearClipboard(session.Ensure(p))
-	o.Print("Clipboard cleared.")
+	o.Print(text.Colourf("<green>Portapapeles limpiado.</green>"))
 }
 
 // CutCommand implements //cut [-noundo] — copies the selection to the clipboard, then clears it.
@@ -63,7 +64,7 @@ func (c CutCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 	p := src.(*player.Player)
 	args, opts := service.ParseEditOptions(strings.Fields(string(c.Args)))
 	if len(args) != 0 {
-		o.Error("usage: //cut [-noundo]")
+		o.Error("uso: //cut [-noundo]")
 		return
 	}
 	result, err := service.CutWithOptions(tx, session.Ensure(p), cube.PosFromVec3(p.Position()), p.Rotation().Direction(), opts)
@@ -71,7 +72,7 @@ func (c CutCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 		o.Error(err)
 		return
 	}
-	o.Printf("Cut %d blocks.", result.Changed)
+	o.Print(text.Colourf("<green>Cortados %d bloques.</green>", result.Changed))
 }
 
 // SchematicCommand implements //schematic <create|paste|delete|list> — disk-backed selection storage.
@@ -91,13 +92,13 @@ func (c SchematicCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 	}
 	switch strings.ToLower(args[0]) {
 	case "create":
-		o.Printf("Saved schematic %q.", result.Name)
+		o.Print(text.Colourf("<green>Esquema %q guardado.</green>", result.Name))
 	case "paste":
-		o.Printf("Pasted schematic %q.", result.Name)
+		o.Print(text.Colourf("<green>Esquema %q pegado.</green>", result.Name))
 	case "delete":
-		o.Printf("Deleted schematic %q.", result.Name)
+		o.Print(text.Colourf("<green>Esquema %q eliminado.</green>", result.Name))
 	case "list":
-		o.Print("Schematics: " + strings.Join(result.Names, ", "))
+		o.Print(text.Colourf("<aqua>Esquemas: %s</aqua>", strings.Join(result.Names, ", ")))
 	}
 }
 
@@ -113,7 +114,7 @@ func (c UndoCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 		o.Error(err)
 		return
 	}
-	o.Print("Undo successful.")
+	o.Print(text.Colourf("<green>Deshacer completado.</green>"))
 }
 
 // RedoCommand implements //redo [b] — restores the last undone edit; "b" targets only the brush stack.
@@ -128,5 +129,5 @@ func (c RedoCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 		o.Error(err)
 		return
 	}
-	o.Print("Redo successful.")
+	o.Print(text.Colourf("<green>Rehacer completado.</green>"))
 }

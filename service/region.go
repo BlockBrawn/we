@@ -76,7 +76,7 @@ func Drain(tx *world.Tx, s Session, center cube.Pos, radius int) (ChangeResult, 
 
 func DrainWithOptions(tx *world.Tx, s Session, center cube.Pos, radius int, opts EditOptions) (ChangeResult, error) {
 	if radius < 1 {
-		return ChangeResult{}, fmt.Errorf("radius must be positive")
+		return ChangeResult{}, fmt.Errorf("el radio debe ser positivo")
 	}
 	batch := historyBatch(opts)
 	edit.Drain(tx, center, radius, batch)
@@ -103,7 +103,7 @@ func SetBiome(tx *world.Tx, s Session, name string) (world.Biome, error) {
 func SetBiomeWithOptions(tx *world.Tx, s Session, name string, opts EditOptions) (world.Biome, error) {
 	b, ok := world.BiomeByName(name)
 	if !ok {
-		return nil, fmt.Errorf("unknown biome %q", name)
+		return nil, fmt.Errorf("bioma desconocido %q", name)
 	}
 	area, err := selectedArea(s)
 	if err != nil {
@@ -127,7 +127,7 @@ func Replace(tx *world.Tx, s Session, args []string) (ChangeResult, error) {
 
 func ReplaceWithOptions(tx *world.Tx, s Session, args []string, opts EditOptions) (ChangeResult, error) {
 	if len(args) < 2 {
-		return ChangeResult{}, fmt.Errorf("usage: //replace <all|from> <to>")
+		return ChangeResult{}, fmt.Errorf("uso: //replace <all|from> <to>")
 	}
 	mask, to, err := ParseMaskTo(args)
 	if err != nil {
@@ -151,7 +151,7 @@ func ReplaceNear(tx *world.Tx, s Session, center cube.Pos, distance int, args []
 
 func ReplaceNearWithOptions(tx *world.Tx, s Session, center cube.Pos, distance int, args []string, opts EditOptions) (ChangeResult, error) {
 	if distance < 1 || len(args) < 2 {
-		return ChangeResult{}, fmt.Errorf("usage: //replacenear <distance> <from> <to>")
+		return ChangeResult{}, fmt.Errorf("uso: //replacenear <distance> <from> <to>")
 	}
 	mask, to, err := ParseMaskTo(args)
 	if err != nil {
@@ -171,7 +171,7 @@ func TopLayer(tx *world.Tx, s Session, args []string) (ChangeResult, error) {
 
 func TopLayerWithOptions(tx *world.Tx, s Session, args []string, opts EditOptions) (ChangeResult, error) {
 	if len(args) < 2 {
-		return ChangeResult{}, fmt.Errorf("usage: //toplayer <all|only:types> <to>")
+		return ChangeResult{}, fmt.Errorf("uso: //toplayer <all|only:types> <to>")
 	}
 	mask, to, err := ParseMaskTo(args)
 	if err != nil {

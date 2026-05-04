@@ -69,7 +69,7 @@ func ApplyBrush(tx *world.Tx, actor BrushActor, target cube.Pos, cfg BrushConfig
 	case BrushLine:
 		applyLineBrush(tx, actor, cfg, blocks, batch)
 	default:
-		return fmt.Errorf("unknown brush type %q", cfg.Type)
+		return fmt.Errorf("tipo de brocha desconocido %q", cfg.Type)
 	}
 	return nil
 }

@@ -19,17 +19,17 @@ var commandDefs = []struct {
 	aliases    []string
 	r          dcf.Runnable
 }{
-	{"/wand", "WorldEdit selection wand", []string{"wand"}, WandCommand{}},
-	{"/pos1", "Set WorldEdit position 1", []string{"pos1"}, Pos1Command{}},
-	{"/pos2", "Set WorldEdit position 2", []string{"pos2"}, Pos2Command{}},
+	{"/wand", "Varita de selección", []string{"wand"}, WandCommand{}},
+	{"/pos1", "Definir primera posición", []string{"pos1"}, Pos1Command{}},
+	{"/pos2", "Definir segunda posición", []string{"pos2"}, Pos2Command{}},
 	{"/set", "Fill selected area", []string{"set", "/fill", "fill"}, SetCommand{}},
 	{"/copy", "Copy selected area", []string{"copy"}, CopyCommand{}},
 	{"/paste", "Paste clipboard", []string{"paste"}, PasteCommand{}},
 	{"/clearclipboard", "Clear clipboard", []string{"clearclipboard"}, ClearClipboardCommand{}},
 	{"/cut", "Cut selected area", []string{"cut"}, CutCommand{}},
 	{"/schematic", "Manage schematics", []string{"schematic", "/schem", "schem"}, SchematicCommand{}},
-	{"/undo", "Undo WorldEdit change", []string{"undo"}, UndoCommand{}},
-	{"/redo", "Redo WorldEdit change", []string{"redo"}, RedoCommand{}},
+	{"/undo", "Deshacer cambio", []string{"undo"}, UndoCommand{}},
+	{"/redo", "Rehacer cambio", []string{"redo"}, RedoCommand{}},
 	{"/center", "Mark selection center", []string{"center"}, CenterCommand{}},
 	{"/walls", "Build selection walls", []string{"walls"}, WallsCommand{}},
 	{"/drain", "Drain fluids", []string{"drain"}, DrainCommand{}},

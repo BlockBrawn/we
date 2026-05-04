@@ -15,7 +15,7 @@ func BindBrush(i item.Stack, cfg service.BrushConfig) (item.Stack, error) {
 	if err != nil {
 		return item.Stack{}, err
 	}
-	name := fmt.Sprintf("WorldEdit %s brush", cfg.Type)
+	name := fmt.Sprintf("§bBrocha %s", cfg.Type)
 	return i.WithValue(keys.BrushConfigKey, string(data)).WithCustomName(name), nil
 }
 

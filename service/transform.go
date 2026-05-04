@@ -18,7 +18,7 @@ func Move(tx *world.Tx, s Session, dir cube.Pos, args []string) (ChangeResult, e
 
 func MoveWithOptions(tx *world.Tx, s Session, dir cube.Pos, args []string, opts EditOptions) (ChangeResult, error) {
 	if len(args) < 2 {
-		return ChangeResult{}, fmt.Errorf("usage: //move <all|only:types> <distance> [-a]")
+		return ChangeResult{}, fmt.Errorf("uso: //move <all|only:types> <distance> [-a]")
 	}
 	mask, err := edit.ParseMask(args[0])
 	if err != nil {
@@ -45,7 +45,7 @@ func Stack(tx *world.Tx, s Session, dir cube.Pos, args []string) (ChangeResult, 
 
 func StackWithOptions(tx *world.Tx, s Session, dir cube.Pos, args []string, opts EditOptions) (ChangeResult, error) {
 	if len(args) < 1 {
-		return ChangeResult{}, fmt.Errorf("usage: //stack <amount> [-a]")
+		return ChangeResult{}, fmt.Errorf("uso: //stack <amount> [-a]")
 	}
 	amount, err := strconv.Atoi(args[0])
 	if err != nil {
@@ -67,18 +67,18 @@ func StackWithOptions(tx *world.Tx, s Session, dir cube.Pos, args []string, opts
 // around the optional args[1] axis (default y).
 func Rotate(tx *world.Tx, s Session, args []string) (ChangeResult, error) {
 	if len(args) < 1 {
-		return ChangeResult{}, fmt.Errorf("usage: //rotate <90|180|270|360> [x|y|z]")
+		return ChangeResult{}, fmt.Errorf("uso: //rotate <90|180|270|360> [x|y|z]")
 	}
 	deg, err := strconv.Atoi(args[0])
 	if err != nil || (deg != 90 && deg != 180 && deg != 270 && deg != 360) {
-		return ChangeResult{}, fmt.Errorf("rotation must be one of 90, 180, 270, or 360")
+		return ChangeResult{}, fmt.Errorf("la rotación debe ser 90, 180, 270 o 360")
 	}
 	axis := "y"
 	if len(args) > 1 {
 		axis = args[1]
 	}
 	if !ValidAxis(axis) {
-		return ChangeResult{}, fmt.Errorf("axis must be x, y, or z")
+		return ChangeResult{}, fmt.Errorf("el eje debe ser x, y o z")
 	}
 	cb, ok := s.Clipboard()
 	if !ok {
@@ -94,7 +94,7 @@ func Rotate(tx *world.Tx, s Session, args []string) (ChangeResult, error) {
 // Flip mirrors the clipboard across axis (x, y, or z).
 func Flip(tx *world.Tx, s Session, axis string) (ChangeResult, error) {
 	if !ValidAxis(axis) {
-		return ChangeResult{}, fmt.Errorf("axis must be x, y, or z")
+		return ChangeResult{}, fmt.Errorf("el eje debe ser x, y o z")
 	}
 	cb, ok := s.Clipboard()
 	if !ok {

@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	dcf "github.com/df-mc/dragonfly/server/cmd"
+	"github.com/sandertv/gophertunnel/minecraft/text"
 
 	"github.com/df-mc/dragonfly/server/block/cube"
 	"github.com/df-mc/dragonfly/server/player"
@@ -26,7 +27,7 @@ func (c MoveCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 		o.Error(err)
 		return
 	}
-	o.Printf("Moved %d blocks.", result.Changed)
+	o.Print(text.Colourf("<green>Movidos %d bloques.</green>", result.Changed))
 }
 
 // StackCommand implements //stack <amount> [-a] — repeats the selection along the player's facing.
@@ -42,7 +43,7 @@ func (c StackCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 		o.Error(err)
 		return
 	}
-	o.Printf("Stacked with %d changes.", result.Changed)
+	o.Print(text.Colourf("<green>Stack aplicado con %d cambios.</green>", result.Changed))
 }
 
 // RotateCommand implements //rotate <90|180|270|360> [axis] — rotates the clipboard.
@@ -58,7 +59,7 @@ func (c RotateCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 		o.Error(err)
 		return
 	}
-	o.Printf("Rotated clipboard with %d entries.", result.Changed)
+	o.Print(text.Colourf("<green>Portapapeles rotado con %d entradas.</green>", result.Changed))
 }
 
 // FlipCommand implements //flip [axis] — mirrors the clipboard across an axis (defaults from facing).
@@ -85,5 +86,5 @@ func (c FlipCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 		o.Error(err)
 		return
 	}
-	o.Printf("Flipped clipboard with %d entries.", result.Changed)
+	o.Print(text.Colourf("<green>Portapapeles espejado con %d entradas.</green>", result.Changed))
 }

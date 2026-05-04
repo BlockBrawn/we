@@ -16,7 +16,7 @@ func applySchematicBrush(tx *world.Tx, target cube.Pos, dir cube.Direction, cfg 
 		store = edit.DefaultSchematicStore()
 	}
 	if len(cfg.Schematics) == 0 {
-		return fmt.Errorf("schematic brush has no schematics selected")
+		return fmt.Errorf("la brocha de schematic no tiene esquemas seleccionados")
 	}
 	name := cfg.Schematics[0]
 	if cfg.RandomSchematic {

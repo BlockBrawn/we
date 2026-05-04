@@ -6,6 +6,7 @@ import (
 	dcf "github.com/df-mc/dragonfly/server/cmd"
 	"github.com/df-mc/dragonfly/server/world"
 	"github.com/df-mc/we/service"
+	"github.com/sandertv/gophertunnel/minecraft/text"
 )
 
 // SearchItemCommand implements //searchitem <query> — lists matching item/block IDs.
@@ -18,13 +19,13 @@ func (SearchItemCommand) Allow(dcf.Source) bool { return true }
 func (c SearchItemCommand) Run(_ dcf.Source, o *dcf.Output, _ *world.Tx) {
 	query := strings.TrimSpace(string(c.Query))
 	if query == "" {
-		o.Error("usage: //searchitem <query>")
+		o.Error("uso: //searchitem <query>")
 		return
 	}
 	matches := service.SearchItems(query, 20)
 	if len(matches) == 0 {
-		o.Printf("No items found for %q.", query)
+		o.Print(text.Colourf("<gold>No se encontraron ítems para %q.</gold>", query))
 		return
 	}
-	o.Print("Matches: " + strings.Join(matches, ", "))
+	o.Print(text.Colourf("<aqua>Coincidencias: %s</aqua>", strings.Join(matches, ", ")))
 }

@@ -23,7 +23,7 @@ func Copy(tx *world.Tx, s Session, _ cube.Pos, dir cube.Direction, args []string
 	mask := edit.BlockMask{All: true, IncludeAir: true}
 	if only {
 		if len(args) < 2 {
-			return CopyResult{}, fmt.Errorf("copy only requires block types")
+			return CopyResult{}, fmt.Errorf("copy solo acepta tipos de bloques")
 		}
 		blocks, err := parse.ParseBlockList(strings.Join(args[1:], " "))
 		if err != nil {
@@ -84,12 +84,12 @@ func Schematic(tx *world.Tx, s Session, origin cube.Pos, dir cube.Direction, sto
 		store = edit.DefaultSchematicStore()
 	}
 	if len(args) == 0 {
-		return SchematicResult{}, fmt.Errorf("usage: //schematic <create|paste|delete|list> [name] [-a]")
+		return SchematicResult{}, fmt.Errorf("uso: //schematic <create|paste|delete|list> [name] [-a]")
 	}
 	switch strings.ToLower(args[0]) {
 	case "create":
 		if len(args) < 2 {
-			return SchematicResult{}, fmt.Errorf("schematic create requires a name")
+			return SchematicResult{}, fmt.Errorf("schematic create requiere un nombre")
 		}
 		area, err := selectedArea(s)
 		if err != nil {
@@ -102,7 +102,7 @@ func Schematic(tx *world.Tx, s Session, origin cube.Pos, dir cube.Direction, sto
 		return SchematicResult{Name: args[1]}, nil
 	case "paste":
 		if len(args) < 2 {
-			return SchematicResult{}, fmt.Errorf("schematic paste requires a name")
+			return SchematicResult{}, fmt.Errorf("schematic paste requiere un nombre")
 		}
 		pasteArgs, opts := ParseEditOptions(args[2:])
 		cb, err := store.Load(args[1])
@@ -117,7 +117,7 @@ func Schematic(tx *world.Tx, s Session, origin cube.Pos, dir cube.Direction, sto
 		return SchematicResult{Name: args[1], Changed: result.Changed}, nil
 	case "delete":
 		if len(args) < 2 {
-			return SchematicResult{}, fmt.Errorf("schematic delete requires a name")
+			return SchematicResult{}, fmt.Errorf("schematic delete requiere un nombre")
 		}
 		if err := store.Delete(args[1]); err != nil {
 			return SchematicResult{}, err
@@ -130,7 +130,7 @@ func Schematic(tx *world.Tx, s Session, origin cube.Pos, dir cube.Direction, sto
 		}
 		return SchematicResult{Names: names}, nil
 	default:
-		return SchematicResult{}, fmt.Errorf("unknown schematic subcommand")
+		return SchematicResult{}, fmt.Errorf("subcomando de schematic desconocido")
 	}
 }
 

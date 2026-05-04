@@ -57,18 +57,18 @@ func RemoveBelowWithOptions(tx *world.Tx, s Session, center cube.Pos, args []str
 func parseHeightRadius(args []string, command string) (height, radius int, err error) {
 	height, radius = defaultRemoveHeight, 0
 	if len(args) > 2 {
-		return 0, 0, fmt.Errorf("usage: %s [height] [radius]", command)
+		return 0, 0, fmt.Errorf("uso: %s [height] [radius]", command)
 	}
 	if len(args) >= 1 {
 		height, err = strconv.Atoi(args[0])
 		if err != nil || height < 1 {
-			return 0, 0, fmt.Errorf("height must be positive")
+			return 0, 0, fmt.Errorf("la altura debe ser positiva")
 		}
 	}
 	if len(args) == 2 {
 		radius, err = strconv.Atoi(args[1])
 		if err != nil || radius < 0 {
-			return 0, 0, fmt.Errorf("radius must be non-negative")
+			return 0, 0, fmt.Errorf("el radio no puede ser negativo")
 		}
 	}
 	return height, radius, nil
@@ -82,11 +82,11 @@ func RemoveNear(tx *world.Tx, s Session, center cube.Pos, args []string) (Change
 
 func RemoveNearWithOptions(tx *world.Tx, s Session, center cube.Pos, args []string, opts EditOptions) (ChangeResult, error) {
 	if len(args) < 2 {
-		return ChangeResult{}, fmt.Errorf("usage: //removenear <blocks> <radius>")
+		return ChangeResult{}, fmt.Errorf("uso: //removenear <blocks> <radius>")
 	}
 	radius, err := strconv.Atoi(args[len(args)-1])
 	if err != nil || radius < 1 {
-		return ChangeResult{}, fmt.Errorf("radius must be positive")
+		return ChangeResult{}, fmt.Errorf("el radio debe ser positivo")
 	}
 	blocks, err := parse.ParseBlockList(strings.Join(args[:len(args)-1], " "))
 	if err != nil {

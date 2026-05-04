@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	dcf "github.com/df-mc/dragonfly/server/cmd"
+	"github.com/sandertv/gophertunnel/minecraft/text"
 
 	"github.com/df-mc/dragonfly/server/block/cube"
 	"github.com/df-mc/dragonfly/server/player"
@@ -29,7 +30,7 @@ func (c LineCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 		o.Error(err)
 		return
 	}
-	o.Printf("Drew line with %d changes.", result.Changed)
+	o.Print(text.Colourf("<green>Línea dibujada con %d cambios.</green>", result.Changed))
 }
 
 // ShapeCommand backs //sphere, //cylinder, //pyramid, //cone, and //cube.
@@ -47,7 +48,7 @@ func (c ShapeCommand) Run(src dcf.Source, o *dcf.Output, tx *world.Tx) {
 		o.Error(err)
 		return
 	}
-	o.Printf("Created %s with %d changes.", c.Kind, result.Changed)
+	o.Print(text.Colourf("<green>%s creado con %d cambios.</green>", c.Kind, result.Changed))
 }
 
 // BrushCommand implements //brush — opens the brush form with no args, or quick-binds with <type> [blocks] [radius].
@@ -60,13 +61,13 @@ func (c BrushCommand) Run(src dcf.Source, o *dcf.Output, _ *world.Tx) {
 	p := src.(*player.Player)
 	held, off := p.HeldItems()
 	if held.Empty() {
-		o.Error("hold an item before running //brush")
+		o.Error("sostén un objeto antes de usar //brush")
 		return
 	}
 	args := strings.Fields(string(c.Args))
 	if len(args) == 0 {
 		editbrush.SendBrushForm(p)
-		o.Print("Opened brush menu.")
+		o.Print(text.Colourf("<aqua>Menú de brochas abierto.</aqua>"))
 		return
 	}
 	cfg := service.DefaultBrushConfig()
@@ -94,5 +95,5 @@ func (c BrushCommand) Run(src dcf.Source, o *dcf.Output, _ *world.Tx) {
 		return
 	}
 	p.SetHeldItems(bound, off)
-	o.Printf("Bound %s brush.", cfg.Type)
+	o.Print(text.Colourf("<green>Brocha %s vinculada.</green>", cfg.Type))
 }
