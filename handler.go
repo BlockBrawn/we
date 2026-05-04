@@ -16,6 +16,7 @@ import (
 	"github.com/df-mc/we/session"
 	"github.com/df-mc/we/visual"
 	"github.com/go-gl/mathgl/mgl64"
+	"github.com/sandertv/gophertunnel/minecraft/text"
 )
 
 // Handler is the main world-edit player handler.
@@ -57,7 +58,7 @@ func (h *Handler) HandleItemUseOnBlock(ctx *player.Context, pos cube.Pos, face c
 		ctx.Cancel()
 		s := session.Ensure(h.p)
 		if s.SetPos2(pos) {
-			h.p.Messagef("pos2 set to %v", pos)
+			h.p.Messagef(text.Colourf("<green>pos2 definida en %v</green>", pos))
 		}
 		h.traceSelection(s)
 		return
@@ -80,7 +81,7 @@ func (h *Handler) HandleBlockBreak(ctx *player.Context, pos cube.Pos, drops *[]i
 		ctx.Cancel()
 		s := session.Ensure(h.p)
 		if s.SetPos1(pos) {
-			h.p.Messagef("pos1 set to %v", pos)
+			h.p.Messagef(text.Colourf("<green>pos1 definida en %v</green>", pos))
 		}
 		h.traceSelection(s)
 		return
